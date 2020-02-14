@@ -1,0 +1,80 @@
+.syntax--markit {
+  @blue: #0184bc;
+
+  // bits
+  .syntax--footnote {
+    background: @blue;
+    color: #fff;
+  }
+  .syntax--line-break {
+    font-weight: bold;
+  }
+  .syntax--ligature {
+    text-decoration: underline;
+  }
+  .syntax--emsp,
+  .syntax--nbsp {
+      color: @blue;
+    }
+  .syntax--emsp {
+    font-weight: bold;
+  }
+
+  // headings
+  .syntax--heading {
+    font-weight: bold;
+    color: inherit;
+  }
+
+  // formatting
+  .syntax--markup {
+    .syntax--markup {
+      color: inherit;
+    }
+  }
+  .syntax--bold {
+    font-weight: bold;
+  }
+  .syntax--italic {
+    font-style: italic;
+  }
+  .syntax--smallcaps,
+  .syntax--foreign,
+  .syntax--proper-name {
+    color: @blue;
+  }
+  .syntax--smallcaps {
+    font-variant: small-caps;
+  }
+  .syntax--foreign {
+    font-style: italic;
+  }
+  .syntax--proper-name {
+    font-weight: bold;
+  }
+
+  // citation
+  .syntax--citation {
+    color: @blue;
+    .syntax--markup {
+      color: inherit;
+    }
+  }
+
+  // block quotation
+  .syntax--block-quotation {
+    .syntax--markup {
+      color: inherit;
+    }
+    .syntax--inline-quotation {
+      text-decoration: underline;
+    }
+  }
+
+  // inline quotation
+  .syntax--inline-quotation {
+    .syntax--markup {
+      color: inherit;
+    }
+  }
+}

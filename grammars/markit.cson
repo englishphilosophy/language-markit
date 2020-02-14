@@ -1,0 +1,169 @@
+scopeName: 'source.markit'
+name: 'Markit'
+limitLineLength: true
+fileTypes: ['mit']
+patterns: [
+  { include: 'text.xml' }
+  { begin: '\\A---$', end: '^(---|\\.\\.\\.)$', patterns: [
+    { include: 'source.yaml' }
+  ] }
+  { include: '#tags' }
+  { include: '#bits' }
+  { include: '#headings' }
+  { include: '#formatting' }
+  { include: '#citation' }
+  { include: '#blockQuotation' }
+  { include: '#inlineQuotation' }
+]
+repository: {
+  tags: {
+    patterns: [
+      { match: '{title}', name: 'entity.name.tag.markit' }
+      { match: '{#[a-z0-9.]+}', name: 'entity.name.tag.markit' }
+    ]
+  }
+  bits: {
+    patterns: [
+      { match: '\\[n[0-9*]+\\]', name: 'bit.footnote.markit' }
+      { match: '\\/\\/', name: 'comment.bit.line-break.markit' }
+      { match: '{(AE|ae|OE|oe)}', name: 'constant.bit.ligature.markit' }
+      { match: '~~', name: 'constant.bit.emsp.markit' }
+      { match: '~', name: 'constant.bit.nbsp.markit' }
+    ]
+  }
+  headings: {
+    patterns: [
+      { begin: '£1 ', end: ' £1', name: 'constant.heading.h1.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£2 ', end: ' £2', name: 'constant.heading.h2.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£3 ', end: ' £3', name: 'constant.heading.h3.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£4 ', end: ' £4', name: 'constant.heading.h4.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£5 ', end: ' £5', name: 'constant.heading.h5.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£6 ', end: ' £6', name: 'constant.heading.h6.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+    ]
+  }
+  formatting: {
+    patterns: [
+      { include: '#bold' }
+      { include: '#italic' }
+      { include: '#smallcaps' }
+      { include: '#foreign' }
+      { include: '#name' }
+      { include: '#comment' }
+    ]
+  }
+  bold: {
+    patterns: [
+      { begin: '\\*', end: '\\*', name: 'markup.bold.markit', patterns: [
+        { include: '#bits' }
+        { include: '#italic' }
+        { include: '#smallcaps' }
+        { include: '#foreign' }
+        { include: '#name' }
+        { include: '#comment' }
+      ] }
+    ]
+  }
+  italic: {
+    patterns: [
+      { begin: '_', end: '_', name: 'markup.italic.markit', patterns: [
+        { include: '#bits' }
+        { include: '#bold' }
+        { include: '#smallcaps' }
+        { include: '#foreign' }
+        { include: '#name' }
+        { include: '#comment' }
+      ] }
+    ]
+  }
+  smallcaps: {
+    patterns: [
+      { begin: '\\^', end: '\\^', name: 'markup.smallcaps.markit', patterns: [
+        { include: '#bits' }
+        { include: '#bold' }
+        { include: '#italic' }
+        { include: '#foreign' }
+        { include: '#name' }
+        { include: '#comment' }
+      ] }
+    ]
+  }
+  foreign: {
+    patterns: [
+      { begin: '\\$', end: '\\$', name: 'markup.foreign.markit', patterns: [
+        { include: '#bits' }
+        { include: '#bold' }
+        { include: '#italic' }
+        { include: '#smallcaps' }
+        { include: '#name' }
+        { include: '#comment' }
+      ] }
+    ]
+  }
+  name: {
+    patterns: [
+      { begin: '=', end: '=', name: 'markup.proper-name.markit', patterns: [
+        { include: '#bits' }
+        { include: '#bold' }
+        { include: '#italic' }
+        { include: '#smallcaps' }
+        { include: '#foreign' }
+        { include: '#comment' }
+      ] }
+    ]
+  }
+  comment: {
+    patterns: [
+      { begin: '#', end: '#', name: 'markup.comment.markit', patterns: [
+        { include: '#bits' }
+        { include: '#bold' }
+        { include: '#italic' }
+        { include: '#smallcaps' }
+        { include: '#foreign' }
+        { include: '#name' }
+      ] }
+    ]
+  }
+  citation: {
+    patterns: [
+      { begin: '\\[', end: '\\]', name: 'citation.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+    ]
+  }
+  blockQuotation: {
+    patterns: [
+      { begin: '""', end: '""', name: 'string.block-quotation.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+        { include: '#inlineQuotation' }
+      ] }
+    ]
+  }
+  inlineQuotation: {
+    patterns: [
+      { begin: '"', end: '"', name: 'string.inline-quotation.markit', patterns: [
+        { include: '#bits' }
+        { include: '#formatting' }
+      ] }
+    ]
+  }
+}
