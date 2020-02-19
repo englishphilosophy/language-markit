@@ -1,80 +1,66 @@
 .syntax--markit {
-  @blue: #0184bc;
-
-  // bits
-  .syntax--footnote {
-    background: @blue;
-    color: #fff;
-  }
-  .syntax--line-break {
-    font-weight: bold;
-  }
-  .syntax--ligature {
-    text-decoration: underline;
-  }
-  .syntax--emsp,
-  .syntax--nbsp {
-      color: @blue;
+  .syntax--tag {
+    .syntax--punctuation {
+      color: gray;
     }
-  .syntax--emsp {
-    font-weight: bold;
-  }
-
-  // headings
-  .syntax--heading {
-    font-weight: bold;
-    color: inherit;
-  }
-
-  // formatting
-  .syntax--markup {
-    .syntax--markup {
-      color: inherit;
-    }
-  }
-  .syntax--bold {
-    font-weight: bold;
-  }
-  .syntax--italic {
-    font-style: italic;
-  }
-  .syntax--smallcaps,
-  .syntax--foreign,
-  .syntax--proper-name {
-    color: @blue;
-  }
-  .syntax--smallcaps {
-    font-variant: small-caps;
-  }
-  .syntax--foreign {
-    font-style: italic;
-  }
-  .syntax--proper-name {
-    font-weight: bold;
-  }
-
-  // citation
-  .syntax--citation {
-    color: @blue;
-    .syntax--markup {
-      color: inherit;
-    }
-  }
-
-  // block quotation
-  .syntax--block-quotation {
-    .syntax--markup {
-      color: inherit;
-    }
-    .syntax--inline-quotation {
+    &.syntax--insertion {
+      background: yellow;
+      color: inherit !important;
       text-decoration: underline;
     }
+    &.syntax--deletion {
+      color: gray !important;
+    }
+    &.syntax--replacement {
+      background: yellow;
+      color: inherit !important;
+      text-decoration: underline;
+      .syntax--arrow {
+        font-weight: bold;
+      }
+    }
   }
 
-  // inline quotation
-  .syntax--inline-quotation {
-    .syntax--markup {
-      color: inherit;
+  .syntax--citation {
+    color: royalblue;
+  }
+
+  .syntax--heading {
+    font-weight: bold;
+  }
+
+  .syntax--punctuation {
+    font-style: normal;
+    color: gray;
+    &.syntax--emsp {
+      color: royalblue;
+      font-weight: bold;
     }
+    &.syntax--nbsp {
+      color: royalblue;
+    }
+    &.syntax--page-break {
+      color: inherit;
+      background: yellow;
+    }
+  }
+
+  .syntax--formatting {
+    &.syntax--bold {
+      font-weight: bold;
+    }
+    &.syntax--italic {
+      font-style: italic;
+    }
+    &.syntax--smallcaps {
+      font-variant: small-caps;
+    }
+    &.syntax--comment {
+      font-style: normal;
+    }
+  }
+
+  .syntax--string .syntax--string {
+    text-decoration: underline;
   }
 }

@@ -3,58 +3,42 @@ name: 'Markit'
 limitLineLength: true
 fileTypes: ['mit']
 patterns: [
-  { include: 'text.xml' }
   { begin: '\\A---$', end: '^(---|\\.\\.\\.)$', patterns: [
     { include: 'source.yaml' }
   ] }
   { include: '#tags' }
-  { include: '#bits' }
-  { include: '#headings' }
+  { include: '#citations' }
   { include: '#formatting' }
-  { include: '#citation' }
-  { include: '#blockQuotation' }
-  { include: '#inlineQuotation' }
+  { include: '#headings' }
+  { include: '#quotations' }
+  { include: '#punctuation' }
+  { include: 'text.xml' }
 ]
 repository: {
   tags: {
     patterns: [
       { match: '{title}', name: 'entity.name.tag.markit' }
-      { match: '{#[a-z0-9.]+}', name: 'entity.name.tag.markit' }
+      { match: '{(AE|ae|OE|oe)}', name: 'entity.constant.markit' }
+      { begin: '{\\+\\+', end: '\\+\\+}', name: 'entity.name.tag.insertion.markit', patterns: [
+        { include: '#formatting' }
+      ] }
+      { begin: '{--', end: '--}', name: 'entity.name.tag.deletion.markit', patterns: [
+        { include: '#formatting' }
+      ] }
+      { begin: '{~~', end: '~~}', name: 'entity.name.tag.replacement.markit', patterns: [
+        { include: '#formatting' }
+        { match: '->', name: 'punctuation.arrow.markit' }
+      ] }
+      { begin: '{', end: '}', name: 'entity.name.tag.markit', patterns: [
+        { match: ',', name: 'punctuation.comma.markit' }
+        { match: '#[^,}]+', name: 'entity.id.markit' }
+        { match: '[^,}]+=[^,}]+', name: 'entity.other.attribute-name.markit' }
+      ] }
     ]
   }
-  bits: {
+  citations: {
     patterns: [
-      { match: '\\[n[0-9*]+\\]', name: 'bit.footnote.markit' }
-      { match: '\\/\\/', name: 'comment.bit.line-break.markit' }
-      { match: '{(AE|ae|OE|oe)}', name: 'constant.bit.ligature.markit' }
-      { match: '~~', name: 'constant.bit.emsp.markit' }
-      { match: '~', name: 'constant.bit.nbsp.markit' }
-    ]
-  }
-  headings: {
-    patterns: [
-      { begin: '£1 ', end: ' £1', name: 'constant.heading.h1.markit', patterns: [
-        { include: '#bits' }
-        { include: '#formatting' }
-      ] }
-      { begin: '£2 ', end: ' £2', name: 'constant.heading.h2.markit', patterns: [
-        { include: '#bits' }
-        { include: '#formatting' }
-      ] }
-      { begin: '£3 ', end: ' £3', name: 'constant.heading.h3.markit', patterns: [
-        { include: '#bits' }
-        { include: '#formatting' }
-      ] }
-      { begin: '£4 ', end: ' £4', name: 'constant.heading.h4.markit', patterns: [
-        { include: '#bits' }
-        { include: '#formatting' }
-      ] }
-      { begin: '£5 ', end: ' £5', name: 'constant.heading.h5.markit', patterns: [
-        { include: '#bits' }
-        { include: '#formatting' }
-      ] }
-      { begin: '£6 ', end: ' £6', name: 'constant.heading.h6.markit', patterns: [
-        { include: '#bits' }
+      { begin: '\\[', end: '\\]', name: 'citation.markit', patterns: [
         { include: '#formatting' }
       ] }
     ]
@@ -69,10 +53,54 @@ repository: {
       { include: '#comment' }
     ]
   }
+  headings: {
+    patterns: [
+      { begin: '£1 ', end: ' £1', name: 'heading.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£2 ', end: ' £2', name: 'heading.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£3 ', end: ' £3', name: 'heading.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£4 ', end: ' £4', name: 'heading.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£5 ', end: ' £5', name: 'heading.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#formatting' }
+      ] }
+      { begin: '£6 ', end: ' £6', name: 'heading.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#formatting' }
+      ] }
+    ]
+  }
+  quotations: {
+    patterns: [
+      { include: '#blockQuotation' }
+      { include: '#inlineQuotation' }
+    ]
+  }
+  punctuation: {
+    patterns: [
+      { match: '&', name: 'punctuation.markit' }
+      { match: '~~', name: 'punctuation.emsp.markit' }
+      { match: '~', name: 'punctuation.nbsp.markit' }
+      { match: '//', name: 'punctuation.line-break.markit' }
+      { match: '\\|', name: 'punctuation.page-break.markit' }
+    ]
+  }
   bold: {
     patterns: [
-      { begin: '\\*', end: '\\*', name: 'markup.bold.markit', patterns: [
-        { include: '#bits' }
+      { begin: '\\*', end: '\\*', name: 'formatting.bold.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#tags' }
         { include: '#italic' }
         { include: '#smallcaps' }
         { include: '#foreign' }
@@ -83,8 +111,9 @@ repository: {
   }
   italic: {
     patterns: [
-      { begin: '_', end: '_', name: 'markup.italic.markit', patterns: [
-        { include: '#bits' }
+      { begin: '_', end: '_', name: 'formatting.italic.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#tags' }
         { include: '#bold' }
         { include: '#smallcaps' }
         { include: '#foreign' }
@@ -95,8 +124,9 @@ repository: {
   }
   smallcaps: {
     patterns: [
-      { begin: '\\^', end: '\\^', name: 'markup.smallcaps.markit', patterns: [
-        { include: '#bits' }
+      { begin: '\\^', end: '\\^', name: 'formatting.smallcaps.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#tags' }
         { include: '#bold' }
         { include: '#italic' }
         { include: '#foreign' }
@@ -107,8 +137,9 @@ repository: {
   }
   foreign: {
     patterns: [
-      { begin: '\\$', end: '\\$', name: 'markup.foreign.markit', patterns: [
-        { include: '#bits' }
+      { begin: '\\$', end: '\\$', name: 'formatting.markup.italic.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#tags' }
         { include: '#bold' }
         { include: '#italic' }
         { include: '#smallcaps' }
@@ -119,8 +150,9 @@ repository: {
   }
   name: {
     patterns: [
-      { begin: '=', end: '=', name: 'markup.proper-name.markit', patterns: [
-        { include: '#bits' }
+      { begin: '=', end: '=', name: 'formatting.markup.bold.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#tags' }
         { include: '#bold' }
         { include: '#italic' }
         { include: '#smallcaps' }
@@ -131,8 +163,9 @@ repository: {
   }
   comment: {
     patterns: [
-      { begin: '#', end: '#', name: 'markup.comment.markit', patterns: [
-        { include: '#bits' }
+      { begin: '#', end: '#', name: 'formatting.comment.markit', patterns: [
+        { include: '#punctuation' }
+        { include: '#tags' }
         { include: '#bold' }
         { include: '#italic' }
         { include: '#smallcaps' }
@@ -141,18 +174,10 @@ repository: {
       ] }
     ]
   }
-  citation: {
-    patterns: [
-      { begin: '\\[', end: '\\]', name: 'citation.markit', patterns: [
-        { include: '#bits' }
-        { include: '#formatting' }
-      ] }
-    ]
-  }
   blockQuotation: {
     patterns: [
-      { begin: '""', end: '""', name: 'string.block-quotation.markit', patterns: [
-        { include: '#bits' }
+      { begin: '""', end: '""', name: 'string.markit', patterns: [
+        { include: '#punctuation' }
         { include: '#formatting' }
         { include: '#inlineQuotation' }
       ] }
@@ -160,8 +185,8 @@ repository: {
   }
   inlineQuotation: {
     patterns: [
-      { begin: '"', end: '"', name: 'string.inline-quotation.markit', patterns: [
-        { include: '#bits' }
+      { begin: '"', end: '"', name: 'string.markit', patterns: [
+        { include: '#punctuation' }
         { include: '#formatting' }
       ] }
     ]
