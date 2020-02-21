@@ -6,6 +6,7 @@ patterns: [
   { begin: '\\A---$', end: '^(---|\\.\\.\\.)$', patterns: [
     { include: 'source.yaml' }
   ] }
+  { include: '#escapes' }
   { include: '#tags' }
   { include: '#citations' }
   { include: '#formatting' }
@@ -15,6 +16,11 @@ patterns: [
   { include: 'text.xml' }
 ]
 repository: {
+  escapes: {
+    patterns: [
+      { match: '\\\\.', name: 'escape.constant.markit' }
+    ]
+  }
   tags: {
     patterns: [
       { match: '{title}', name: 'entity.name.tag.markit' }
