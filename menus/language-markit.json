@@ -1,0 +1,41 @@
+{
+  "context-menu": {
+    "atom-text-editor": []
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Markit",
+          "submenu": [
+            {
+              "label": "Bold",
+              "command": "language-markit:bold"
+            },
+            {
+              "label": "Italics",
+              "command": "language-markit:italics"
+            },
+            {
+              "label": "Small capitals",
+              "command": "language-markit:smallcaps"
+            },
+            {
+              "label": "Foreign text",
+              "command": "language-markit:foreign"
+            },
+            {
+              "label": "Proper name",
+              "command": "language-markit:name"
+            },
+            {
+              "label": "Margin comment",
+              "command": "language-markit:comment"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
