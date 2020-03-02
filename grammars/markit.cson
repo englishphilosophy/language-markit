@@ -26,16 +26,20 @@ repository: {
       { match: '{title}', name: 'entity.name.tag.markit' }
       { match: '{(AE|ae|OE|oe)}', name: 'entity.constant.markit' }
       { begin: '{\\+\\+', end: '\\+\\+}', name: 'entity.name.tag.insertion.markit', patterns: [
+        { include: '#escapes' }
         { include: '#formatting' }
       ] }
       { begin: '{--', end: '--}', name: 'entity.name.tag.deletion.markit', patterns: [
+        { include: '#escapes' }
         { include: '#formatting' }
       ] }
       { begin: '{~~', end: '~~}', name: 'entity.name.tag.replacement.markit', patterns: [
+        { include: '#escapes' }
         { include: '#formatting' }
         { match: '->', name: 'punctuation.arrow.markit' }
       ] }
       { begin: '{', end: '}', name: 'entity.name.tag.markit', patterns: [
+        { include: '#escapes' }
         { match: ',', name: 'punctuation.comma.markit' }
         { match: '#[^,}]+', name: 'entity.id.markit' }
         { match: '[^,}]+=[^,}]+', name: 'entity.other.attribute-name.markit' }
@@ -45,6 +49,7 @@ repository: {
   citations: {
     patterns: [
       { begin: '\\[', end: '\\]', name: 'citation.markit', patterns: [
+        { include: '#escapes' }
         { include: '#formatting' }
       ] }
     ]
@@ -62,26 +67,32 @@ repository: {
   headings: {
     patterns: [
       { begin: '£1 ', end: ' £1', name: 'heading.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
       { begin: '£2 ', end: ' £2', name: 'heading.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
       { begin: '£3 ', end: ' £3', name: 'heading.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
       { begin: '£4 ', end: ' £4', name: 'heading.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
       { begin: '£5 ', end: ' £5', name: 'heading.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
       { begin: '£6 ', end: ' £6', name: 'heading.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
@@ -105,6 +116,7 @@ repository: {
   bold: {
     patterns: [
       { begin: '\\*', end: '\\*', name: 'formatting.bold.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#tags' }
         { include: '#italic' }
@@ -118,6 +130,7 @@ repository: {
   italic: {
     patterns: [
       { begin: '_', end: '_', name: 'formatting.italic.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#tags' }
         { include: '#bold' }
@@ -131,6 +144,7 @@ repository: {
   smallcaps: {
     patterns: [
       { begin: '\\^', end: '\\^', name: 'formatting.smallcaps.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#tags' }
         { include: '#bold' }
@@ -144,6 +158,7 @@ repository: {
   foreign: {
     patterns: [
       { begin: '\\$', end: '\\$', name: 'formatting.markup.italic.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#tags' }
         { include: '#bold' }
@@ -157,6 +172,7 @@ repository: {
   name: {
     patterns: [
       { begin: '=', end: '=', name: 'formatting.markup.bold.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#tags' }
         { include: '#bold' }
@@ -170,6 +186,7 @@ repository: {
   comment: {
     patterns: [
       { begin: '#', end: '#', name: 'formatting.comment.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#tags' }
         { include: '#bold' }
@@ -183,6 +200,7 @@ repository: {
   blockQuotation: {
     patterns: [
       { begin: '""', end: '""', name: 'string.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
         { include: '#inlineQuotation' }
@@ -192,6 +210,7 @@ repository: {
   inlineQuotation: {
     patterns: [
       { begin: '"', end: '"', name: 'string.markit', patterns: [
+        { include: '#escapes' }
         { include: '#punctuation' }
         { include: '#formatting' }
       ] }
