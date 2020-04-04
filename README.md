@@ -1,5 +1,5 @@
-# Markit syntax highlighting for Atom
+# Markit language support for Atom and VSCode
 
-This package provides syntax highlighting support for Markit. Markit is a
-Markdown-style language for TEI-XML, which is still in the earliest stages of
-development.
+This package provides language recognition and syntax highlighting for Markit,
+for both Atom and Visual Studio Code. Markit is a Markdown-style language for
+TEI-XML.

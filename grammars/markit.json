@@ -1,0 +1,231 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "source.markit",
+  "name": "Markit",
+  "fileTypes": ["mit"],
+  "patterns": [
+	{ "begin": "\\A---$", "end": "^(---|\\.\\.\\.)$", "patterns": [
+	  { "include": "source.yaml" }
+    ] },
+    { "include": "#escapes" },
+    { "include": "#tags" },
+    { "include": "#citations" },
+	{ "include": "#markup" },
+	{ "include": "#headings" },
+	{ "include": "#quotations" },
+	{ "include": "#punctuation" },
+	{ "include": "text.xml" }
+  ],
+  "repository": {
+	"escapes": {
+		"patterns": [
+		  { "match": "\\\\.", "name": "constant.character.escape.markit" }
+		]
+	  },
+	  "tags": {
+		"patterns": [
+		  { "match": "{title}", "name": "entity.name.tag.markit" },
+		  { "match": "{(AE|ae|OE|oe)}", "name": "entity.name.constant.markit" },
+		  { "begin": "{\\+\\+", "end": "\\+\\+}", "name": "markup.inserted.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "{--", "end": "--}", "name": "markup.deleted.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "{~~", "end": "~~}", "name": "markup.inserted.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#markup" },
+			{ "match": "->", "name": "punctuation.accessor.markit" }
+		  ] },
+		  { "begin": "{", "end": "}", "name": "entity.name.tag.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "match": ",", "name": "punctuation.separator.markit" },
+			{ "match": "#[^,}]+", "name": "entity.other.attribute-name.markit" },
+			{ "match": "[^,}]+=[^,}]+", "name": "entity.other.attribute-name.markit" }
+		  ] }
+		]
+	  },
+	  "citations": {
+		"patterns": [
+		  { "begin": "\\[", "end": "\\]", "name": "variable.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#markup" }
+		  ] }
+		]
+	  },
+	  "markup": {
+		"patterns": [
+		  { "include": "#bold" },
+		  { "include": "#italic" },
+		  { "include": "#smallcaps" },
+		  { "include": "#foreign" },
+		  { "include": "#name" },
+		  { "include": "#comment" }
+		]
+	  },
+	  "headings": {
+		"patterns": [
+		  { "begin": "£1 ", "end": " £1", "name": "markup.heading.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "£2 ", "end": " £2", "name": "markup.heading.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "£3 ", "end": " £3", "name": "markup.heading.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "£4 ", "end": " £4", "name": "markup.heading.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "£5 ", "end": " £5", "name": "markup.heading.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] },
+		  { "begin": "£6 ", "end": " £6", "name": "markup.heading.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] }
+		]
+	  },
+	  "quotations": {
+		"patterns": [
+		  { "include": "#blockQuotation" },
+		  { "include": "#inlineQuotation" }
+		]
+	  },
+	  "punctuation": {
+		"patterns": [
+		  { "match": "&", "name": "keyword.markit" },
+		  { "match": "~~", "name": "keyword.markit" },
+		  { "match": "~", "name": "variable.markit" },
+		  { "match": "//", "name": "comment.markit" },
+		  { "match": "\\|", "name": "comment.markit" }
+		]
+	  },
+	  "bold": {
+		"patterns": [
+		  { "begin": "\\*", "end": "\\*", "name": "markup.bold.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#italic" },
+			{ "include": "#smallcaps" },
+			{ "include": "#foreign" },
+			{ "include": "#name" },
+			{ "include": "#comment" }
+		  ] }
+		]
+	  },
+	  "italic": {
+		"patterns": [
+		  { "begin": "_", "end": "_", "name": "markup.italic.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#bold" },
+			{ "include": "#smallcaps" },
+			{ "include": "#foreign" },
+			{ "include": "#name" },
+			{ "include": "#comment" }
+		  ] }
+		]
+	  },
+	  "smallcaps": {
+		"patterns": [
+		  { "begin": "\\^", "end": "\\^", "name": "markup.underline.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#bold" },
+			{ "include": "#italic" },
+			{ "include": "#foreign" },
+			{ "include": "#name" },
+			{ "include": "#comment" }
+		  ] }
+		]
+	  },
+	  "foreign": {
+		"patterns": [
+		  { "begin": "\\$\\$", "end": "\\$\\$", "name": "markup.italic.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#bold" },
+			{ "include": "#italic" },
+			{ "include": "#smallcaps" },
+			{ "include": "#name" },
+			{ "include": "#comment" }
+		  ] },
+      { "begin": "\\$", "end": "\\$", "name": "markup.italic.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#bold" },
+			{ "include": "#italic" },
+			{ "include": "#smallcaps" },
+			{ "include": "#name" },
+			{ "include": "#comment" }
+		  ] }
+		]
+	  },
+	  "name": {
+		"patterns": [
+		  { "begin": "=", "end": "=", "name": "markup.bold.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#bold" },
+			{ "include": "#italic" },
+			{ "include": "#smallcaps" },
+			{ "include": "#foreign" },
+			{ "include": "#comment" }
+		  ] }
+		]
+	  },
+	  "comment": {
+		"patterns": [
+		  { "begin": "#", "end": "#", "name": "comment.block.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#tags" },
+			{ "include": "#bold" },
+			{ "include": "#italic" },
+			{ "include": "#smallcaps" },
+			{ "include": "#foreign" },
+			{ "include": "#name" }
+		  ] }
+		]
+	  },
+	  "blockQuotation": {
+		"patterns": [
+		  { "begin": "\"\"", "end": "\"\"", "name": "string.quoted.double.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" },
+			{ "include": "#inlineQuotation" }
+		  ] }
+		]
+	  },
+	  "inlineQuotation": {
+		"patterns": [
+		  { "begin": "\"", "end": "\"", "name": "string.quoted.double.markit", "patterns": [
+			{ "include": "#escapes" },
+			{ "include": "#punctuation" },
+			{ "include": "#markup" }
+		  ] }
+		]
+	  }
+  }
+}

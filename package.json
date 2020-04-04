@@ -1,20 +1,39 @@
 {
   "name": "language-markit",
-  "version": "0.2.1",
-  "description": "Markit syntax highlighting for Atom",
+  "version": "1.0.0",
+  "description": "Markit language support for Atom and VSCode",
   "keywords": [
     "language",
     "grammar",
     "markit",
     "tei"
   ],
-  "main": "./lib/language-markit",
   "repository": {
     "type": "git",
     "url": "https://github.com/englishphilosophy/language-markit"
   },
   "license": "MIT",
   "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+    "atom": ">=1.0.0 <2.0.0",
+    "vscode": "^1.43.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "markit",
+      "aliases": ["Markit", "markit"],
+      "extensions": [".mit"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "markit",
+      "scopeName": "source.markit",
+      "path": "./grammars/markit.json",
+      "embeddedLanguages": {
+        "meta.embedded.block.yaml": "yaml"
+      }
+    }]
   }
 }
