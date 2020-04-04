@@ -2,6 +2,7 @@
   "name": "language-markit",
   "version": "1.0.0",
   "description": "Markit language support for Atom and VSCode",
+  "publisher": "englishphilosophy",
   "keywords": [
     "language",
     "grammar",
